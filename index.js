@@ -1,0 +1,25 @@
+export default {
+  async fetch(request, env, ctx) {
+    const response = await fetch(request);
+    
+    // Jika server asal mengembalikan error 502
+    if (response.status === 502) {
+      const customHtml = `
+        <!DOCTYPE html>
+        <html>
+        <head><title>Website Sedang Maintenance</title></head>
+        <body style="font-family:sans-serif; text-align:center; padding:100px;">
+          <h1>Maaf, Website Sedang Sibuk Bangeeeet!</h1>
+          <p>Kami akan segera kembali dalam beberapa menit.</p>
+        </body>
+        </html>
+      `;
+      return new Response(customHtml, {
+        status: 502,
+        headers: { 'content-type': 'text/html;charset=UTF-8' }
+      });
+    }
+    
+    return response;
+  }
+};
