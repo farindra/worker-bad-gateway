@@ -1,27 +1,28 @@
-<script>
-export default {
-  async fetch(request, env, ctx) {
-    const response = await fetch(request);
-    
-    // Jika server asal mengembalikan error 502
-    if (response.status === 502) {
-      const customHtml = `
-        <!DOCTYPE html>
-        <html>
-        <head><title>Website Sedang Maintenance</title></head>
-        <body style="font-family:sans-serif; text-align:center; padding:100px;">
-          <h1>Maaf, Website Sedang Sibuk Bangeeeet!</h1>
-          <p>Kami akan segera kembali dalam beberapa menit.</p>
-        </body>
-        </html>
-      `;
-      return new Response(customHtml, {
-        status: 502,
-        headers: { 'content-type': 'text/html;charset=UTF-8' }
-      });
-    }
-    
-    return response;
-  }
-};
-</script>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Sedang Mengalami Gangguan (Error 502)</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; color: #1f2937; display: flex; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
+        .container { max-width: 500px; width: 100%; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); text-align: center; }
+        .icon { font-size: 64px; color: #ef4444; margin-bottom: 20px; }
+        h1 { font-size: 24px; font-weight: 700; margin-bottom: 12px; color: #111827; }
+        p { font-size: 16px; color: #4b5563; line-height: 1.6; margin-bottom: 30px; }
+        .btn { display: inline-block; background-color: #2563eb; color: #ffffff; padding: 12px 24px; text-decoration: none; font-weight: 600; border-radius: 6px; transition: background 0.2s; }
+        .btn:hover { background-color: #1d4ed8; }
+        .footer { margin-top: 25px; font-size: 12px; color: #9ca3af; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">⚠️</div>
+        <h1>Layanan Sedang Terganggu</h1>
+        <p>Kami mendeteksi adanya masalah koneksi ke server utama kami (Bad Gateway). Tim teknis kami sedang mendeploy perbaikan otomatis. Mohon tunggu beberapa menit.</p>
+        <a href="." class="btn">Coba Muat Ulang</a>
+        <div class="footer">Kode Error: 502 Bad Gateway</div>
+    </div>
+</body>
+</html>
